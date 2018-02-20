@@ -184,6 +184,8 @@ Here you can find all parameters:
             Force creating new guest (no questions, destroys one the same name)
       --add-ip | -w
             Add IP address to /etc/hosts (works only with NAT)
+      --loopback-hostname
+            Add hostname assigned to 127.0.0.1 to /etc/hosts
       --graphics [opts] | -g [opts]
             Graphics options passed to virt-install via --graphics
             (default is vnc,listen=0.0.0.0)
