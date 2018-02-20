@@ -45,12 +45,14 @@ print "Configuring message of the day\n";
 $content = "\n\nSnap-guest box from $ENV{SOURCE_NAME} on " . `date` . "\n\n";
 $g->write ("/etc/motd", $content);
 
-print "Configuring /etc/hosts file\n";
-$file = "/etc/hosts";
-$content = $g->read_file ($file);
-$content =~ s/$ENV{SOURCE_NAME}/localbox/g;
-$content .= "\n127.0.0.1 $ENV{TARGET_HOSTNAME} $ENV{TARGET_NAME}\n";
-$g->write ($file, $content);
+if ($ENV{LOOPBACK_HOSTNAME} == 1) {
+  print "Configuring /etc/hosts file\n";
+  $file = "/etc/hosts";
+  $content = $g->read_file ($file);
+  $content =~ s/$ENV{SOURCE_NAME}/localbox/g;
+  $content .= "\n127.0.0.1 $ENV{TARGET_HOSTNAME} $ENV{TARGET_NAME}\n";
+  $g->write ($file, $content);
+}
 
 if ($distro eq "debian" || $distro eq "ubuntu") {
   print "Setting up for Debian\n";
