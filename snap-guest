@@ -292,7 +292,7 @@ echo "CPUs:     $CPUS"
 echo "Memory:   $MEM MB"
 echo "Swap:     $MEM MB"
 echo "MAC:      $MAC"
-virt-install --vcpus $CPUS \
+while ! virt-install --vcpus $CPUS \
   --ram $MEM --import \
   --name $TARGET_NAME \
   --disk $TARGET_IMG,device=disk,bus=virtio,format=qcow2 $DISK_SWAP $DISK_SEED \
@@ -301,6 +301,7 @@ virt-install --vcpus $CPUS \
   --network=$NETWORK,mac=$MAC \
   $NETWORK2 \
   $CPU_FEATURE
+do sleep 1; done
 
 # -- IP Determining -------------
 # TODO: Use this instead: http://rwmj.wordpress.com/2010/10/26/tip-find-the-ip-address-of-a-virtual-machine/
