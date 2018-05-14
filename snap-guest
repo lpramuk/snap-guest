@@ -292,7 +292,8 @@ echo "CPUs:     $CPUS"
 echo "Memory:   $MEM MB"
 echo "Swap:     $MEM MB"
 echo "MAC:      $MAC"
-while ! virt-install --vcpus $CPUS \
+STDERR=$(mktemp)
+while virt-install --vcpus $CPUS \
   --ram $MEM --import \
   --name $TARGET_NAME \
   --disk $TARGET_IMG,device=disk,bus=virtio,format=qcow2 $DISK_SWAP $DISK_SEED \
@@ -300,7 +301,9 @@ while ! virt-install --vcpus $CPUS \
   --noautoconsole --force \
   --network=$NETWORK,mac=$MAC \
   $NETWORK2 \
-  $CPU_FEATURE
+  $CPU_FEATURE 2> >(tee $STDERR)
+  # loop only if stderr contains the race condition error
+  grep -q "Domain not found:" $STDERR
 do sleep 1; done
 
 # -- IP Determining -------------
