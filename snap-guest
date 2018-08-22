@@ -302,8 +302,8 @@ while virt-install --vcpus $CPUS \
   --network=$NETWORK,mac=$MAC \
   $NETWORK2 \
   $CPU_FEATURE 2> >(tee $STDERR)
-  # loop only if stderr contains the race condition error
-  grep -q "Domain not found:" $STDERR
+  # loop only if stderr contains the race condition errors
+  grep -qE "Domain not found:|already in use by another pool" $STDERR
 do sleep 1; done
 
 # -- IP Determining -------------
