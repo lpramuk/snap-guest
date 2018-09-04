@@ -197,6 +197,8 @@ Here you can find all parameters:
       --firstboot [command] | -1 [command]
             Command to execute during first boot in /root dir
             (logfile available in /root/firstboot.log)
+      --qemu-ga
+            Add qemu-ga channel device to support qemu-guest-agent
       --cloud-image
             Disables image manipulation and enables cloud-init seed via CD-ROM
       --user-data-file [file]
