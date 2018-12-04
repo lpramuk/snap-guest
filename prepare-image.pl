@@ -95,6 +95,11 @@ elsif ($distro =~ m/^(fedora|rhel|redhat-based|centos|scientificlinux)$/) {
     $g->write ($file, join ("\n", @lines) . "\n");
   }
 }
+elsif($distro eq "sles") {
+  print "Setting up for SLES\n";
+  print "Setting hostname\n";
+  $g->write ("/etc/hostname", $ENV{TARGET_HOSTNAME});
+}
 
 if ($ENV{SWAP}) {
   print "Adding swap file\n";
