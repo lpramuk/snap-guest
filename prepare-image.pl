@@ -61,6 +61,7 @@ if ($distro eq "debian" || $distro eq "ubuntu") {
 elsif ($distro =~ m/^(fedora|rhel|redhat-based|centos|scientificlinux)$/) {
   print "Setting up for Fedora / RHEL\n";
   $file = "/etc/sysconfig/network-scripts/ifcfg-eth0";
+  $file =  $g->exists ($file) ? $file : "/etc/sysconfig/network-scripts/ifcfg-ens3";
   if ($ENV{STATIC_IPADDR}) {
     print "Setting static network configuration\n";
     $content = "DEVICE=eth0\n";
