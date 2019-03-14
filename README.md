@@ -176,6 +176,8 @@ Here you can find all parameters:
             Target images path (default: /var/lib/libvirt/images/)
       --base-image-dir [path]
             Base images path (default: /var/lib/libvirt/images/)
+      --clone-image
+            Clone target image as independent instead of creating CoW snapshot
       --domain [domain] | -d [domain]
             Domain suffix like "mycompany.com" (default: none)
       --domain-prefix [prefix]
